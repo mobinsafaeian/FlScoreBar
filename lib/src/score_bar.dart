@@ -3,7 +3,7 @@ import 'package:fl_score_bar/src/custom_track_shape.dart';
 import 'package:flutter/material.dart';
 
 class FlScoreBar extends StatefulWidget {
-  final String title;
+  final String? title;
   final TextStyle? textStyle;
   final double score;
   final int maxScore;
@@ -17,7 +17,7 @@ class FlScoreBar extends StatefulWidget {
 
   const FlScoreBar({
     Key? key,
-    required this.title,
+    this.title,
     required this.score,
     this.textStyle,
     this.highScoreColor = BaseColors.highScoreColor,
@@ -32,7 +32,7 @@ class FlScoreBar extends StatefulWidget {
 
   const FlScoreBar.editable({
     Key? key,
-    required this.title,
+    this.title,
     required this.score,
     this.textStyle,
     this.highScoreColor = BaseColors.highScoreColor,
@@ -69,10 +69,10 @@ class _FlScoreBarState extends State<FlScoreBar> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.title,
+          widget.title != null ? Text(
+            widget.title!,
             style: widget.textStyle,
-          ),
+          ) : Container(),
           const SizedBox(
             height: 4,
           ),
