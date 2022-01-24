@@ -1,8 +1,6 @@
 name: fl_score_bar
 description: Flutter Score bar package
 version: 0.0.1
-authors:
-  - mobin.dev<mobinsafaeian@gmail.com>
 homepage: https://github.com/mobinsafaeian/FlScoreBar.git
 
 environment:
