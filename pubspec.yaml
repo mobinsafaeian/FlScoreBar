@@ -1,5 +1,5 @@
 name: fl_score_bar
-description: Flutter Score bar package
+description: Flutter custom ScoreBar that provides 2 states, mutable and immutable for submitting and showing the content score.
 version: 0.0.1
 homepage: https://github.com/mobinsafaeian/FlScoreBar.git
 

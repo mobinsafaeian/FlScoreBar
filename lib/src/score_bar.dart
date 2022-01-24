@@ -3,10 +3,15 @@ import 'package:fl_score_bar/src/custom_track_shape.dart';
 import 'package:flutter/material.dart';
 
 class FlScoreBar extends StatefulWidget {
+  // title of the scoreBar (Optional)
   final String? title;
+  // textStyle sets as a style of all Texts widget declared in this class (Optional)
   final TextStyle? textStyle;
+  // current score (Required)
   final double score;
+  // max score of the content (Optional - default value is 5)
   final int maxScore;
+  // you can define custom colors to show better ui to user in different score values (Optional - default values sets in constructor)
   final Color highScoreColor;
   final Color lowScoreColor;
   final Color averageScoreColor;
@@ -30,6 +35,7 @@ class FlScoreBar extends StatefulWidget {
         _editable = false,
         super(key: key);
 
+  /// This named constructor sets _editable value to true and make slider visible to the user.
   const FlScoreBar.editable({
     Key? key,
     this.title,
@@ -50,6 +56,7 @@ class FlScoreBar extends StatefulWidget {
 }
 
 class _FlScoreBarState extends State<FlScoreBar> {
+  // Current score value - can be changed by slider
   late double _currentValue;
 
   @override
@@ -60,6 +67,7 @@ class _FlScoreBarState extends State<FlScoreBar> {
 
   @override
   Widget build(BuildContext context) {
+    // get bar color based on score value
     Color barColor = _getBarColor(context);
 
     return Container(
@@ -69,16 +77,19 @@ class _FlScoreBarState extends State<FlScoreBar> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          widget.title != null ? Text(
-            widget.title!,
-            style: widget.textStyle,
-          ) : Container(),
+          widget.title != null
+              ? Text(
+                  widget.title!,
+                  style: widget.textStyle,
+                )
+              : Container(),
           const SizedBox(
             height: 4,
           ),
+          // choose between immutable and mutable states
           widget._editable
-              ? _editableScoreBarWidget(barColor)
-              : _scoreBarWidget(barColor)
+              ? _editableScoreBarWidget(barColor) // mutable state
+              : _scoreBarWidget(barColor) // immutable state
         ],
       ),
     );
@@ -205,15 +216,17 @@ class _FlScoreBarState extends State<FlScoreBar> {
                   right: 0,
                   bottom: 0,
                   child: SliderTheme(
-                    data: SliderThemeData(trackShape: CustomTrackShape()),
+                    data: SliderThemeData(trackShape: CustomTrackShape()), // Defining custom TrackShape to remove the default padding.
                     child: Slider(
                       min: 0,
                       thumbColor: barColor,
-                      activeColor: Colors.transparent,
-                      inactiveColor: Colors.transparent,
+                      activeColor: Colors.transparent, // TrackShape colors must be transparent to make them invisible.
+                      inactiveColor: Colors.transparent, // TrackShape colors must be transparent to make them invisible.
                       max: widget.maxScore.toDouble(),
                       value: _currentValue,
                       onChanged: (value) {
+                        // Rebuild widget to change the current score value
+                        // and re-initialize the colors and score widget parts (only enabled in mutable state)
                         setState(() {
                           _currentValue = value;
                         });
