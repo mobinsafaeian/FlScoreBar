@@ -1,3 +1,3 @@
-## 0.0.1
+## 0.0.1 - [24/01/2022]
 
-* TODO: Describe initial release.
+* Added ScoreBar that can be mutable/immutable
