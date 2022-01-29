@@ -1,3 +1,7 @@
+## 0.2.3 - [29/01/2022]
+
+* Complete documentations
+
 ## 0.2.2 - [29/01/2022]
 
 * Added IconScoreBar that can used with custom icons.

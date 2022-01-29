@@ -1,6 +1,6 @@
 name: fl_score_bar
 description: Flutter custom ScoreBar that provides 2 types of ScoreBar, FlScoreBar and IconScoreBar, both can be immutable/mutable.
-version: 0.2.2
+version: 0.2.3
 homepage: https://github.com/mobinsafaeian/FlScoreBar.git
 
 environment:
