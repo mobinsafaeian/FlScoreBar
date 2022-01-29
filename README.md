@@ -7,11 +7,15 @@ And `mutable` is the state that can be changed by the user action.
 
 First of all, you must add the package to your `pubspec.yaml`:
 
-```fl_score_bar: ^0.0.1```
+```yaml
+fl_score_bar: ^0.2.2
+```
 
 or enter this in your command line: 
 
-```flutter pub add fl_score_bar```
+```yaml
+flutter pub add fl_score_bar
+```
 
 
 ## Sample
@@ -20,7 +24,7 @@ or enter this in your command line:
 
 FlScoreBar can be added to your widget tree like this:
 
-```
+```dart
   //immutable
   FlScoreBar( 
     title: 'score',
@@ -35,7 +39,7 @@ FlScoreBar can be added to your widget tree like this:
 
 or 
 
-```
+```dart
   //mutable
   FlScoreBar.editable(
     title: 'score',
@@ -55,7 +59,7 @@ or
 
 IconScoreBar can be added to your widget tree like this:
 
-```
+```dart
   IconScoreBar(
     scoreIcon: Icons.star,
     iconColor: Colors.amber,
