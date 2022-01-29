@@ -20,6 +20,8 @@ flutter pub add fl_score_bar
 
 ## Sample
 
+![fl_score_bar](https://github.com/mobinsafaeian/FlScoreBar/blob/master/fl_score_bar.gif)
+
 ## FlScoreBar
 
 FlScoreBar can be added to your widget tree like this:
