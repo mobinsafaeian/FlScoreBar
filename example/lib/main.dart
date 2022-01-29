@@ -35,14 +35,37 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const FlScoreBar.editable(
-        title: 'score',
-        maxScore: 5,
-        score: 4.3,
-        averageScoreColor: Colors.yellow,
-        highScoreColor: Colors.green,
-        lowScoreColor: Colors.red,
-        textStyle: TextStyle(color: Colors.black),
+      body: Column(
+        children: const [
+          // immutable
+          FlScoreBar(
+            title: 'score',
+            maxScore: 5,
+            score: 4.3,
+            averageScoreColor: Colors.yellow,
+            highScoreColor: Colors.green,
+            lowScoreColor: Colors.red,
+            textStyle: TextStyle(color: Colors.black),
+          ),
+          // mutable
+          FlScoreBar.editable(
+            title: 'score',
+            maxScore: 5,
+            score: 4.3,
+            averageScoreColor: Colors.yellow,
+            highScoreColor: Colors.green,
+            lowScoreColor: Colors.red,
+            textStyle: TextStyle(color: Colors.black),
+          ),
+          // Icon Score Bar
+          IconScoreBar(
+            scoreIcon: Icons.star,
+            iconColor: Colors.amber,
+            score: 2.6,
+            maxScore: 5,
+            readOnly: false,
+          )
+        ],
       ),
     );
   }
