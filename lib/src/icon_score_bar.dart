@@ -22,6 +22,11 @@ class IconScoreBar extends StatefulWidget {
   /// default value is false
   final bool readOnly;
 
+  /// onChange method to get the updated score value
+  final void Function(double)? onChanged;
+
+  /// [score] must be lower or equal than [maxScore] to make the widget work correctly.
+  /// Also, [maxScore] must be between 2 and 8.
   const IconScoreBar({
     Key? key,
     required this.scoreIcon,
@@ -29,7 +34,11 @@ class IconScoreBar extends StatefulWidget {
     required this.score,
     required this.maxScore,
     this.readOnly = false,
-  }) : super(key: key);
+    this.onChanged,
+  })  : assert(score <= maxScore, 'score must be lower or equal than maxScore'),
+        assert(maxScore < 8 && maxScore > 2,
+            'maxScore must be lower than 8 and greater than 2'),
+        super(key: key);
 
   @override
   _IconScoreBarState createState() => _IconScoreBarState();
@@ -48,9 +57,10 @@ class _IconScoreBarState extends State<IconScoreBar> {
   }
 
   /// First of all, we create [IconScoreBar] structure with 0 to [widget.maxScore]th RatingItem
-  /// with 0.4 opacity.
+  /// with 0.3 opacity.
   /// Then, we create main score row widget based on [widget.score] value.
-  /// Then, we had to put an invisible [Slider] on the score widget.
+  /// Then, we had to put an invisible [Slider] on the score widget to update
+  /// score value by user.
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -90,9 +100,15 @@ class _IconScoreBarState extends State<IconScoreBar> {
               onChanged: widget.readOnly
                   ? null
                   : (value) {
+                      /// Rebuild widget to change the current score value
+                      /// and re-initialize the [currentValue] and score widget parts
                       setState(() {
                         currentValue = value;
                       });
+
+                      /// call [widget.onChanged] method to notify that
+                      /// the score value is updated
+                      if (widget.onChanged != null) widget.onChanged!(value);
                     },
             ),
           ),

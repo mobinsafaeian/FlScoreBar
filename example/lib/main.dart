@@ -36,9 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Column(
-        children: const [
+        children: [
           // immutable
-          FlScoreBar(
+          const FlScoreBar(
             title: 'score',
             maxScore: 5,
             score: 4.3,
@@ -55,7 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
             averageScoreColor: Colors.yellow,
             highScoreColor: Colors.green,
             lowScoreColor: Colors.red,
-            textStyle: TextStyle(color: Colors.black),
+            textStyle: const TextStyle(color: Colors.black),
+            onChanged: (value) {
+              print('FlScoreBar updated value -> $value');
+            },
           ),
           // Icon Score Bar
           IconScoreBar(
@@ -64,6 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
             score: 2.6,
             maxScore: 5,
             readOnly: false,
+            onChanged: (value) {
+              print('IconScoreBar updated value -> $value');
+            },
           )
         ],
       ),

@@ -20,6 +20,12 @@ class FlScoreBar extends StatefulWidget {
   /// else value is constant
   final bool _editable;
 
+  /// onChange method to get the updated score value
+  final void Function(double)? onChanged;
+
+  /// This constructor sets _editable value to false and make slider immutable.
+  /// [score] must be lower or equal than [maxScore] to make the widget work correctly.
+  /// Also, [maxScore] must be between 2 and 8.
   const FlScoreBar({
     Key? key,
     this.title,
@@ -33,9 +39,12 @@ class FlScoreBar extends StatefulWidget {
         assert(maxScore < 8 && maxScore > 2,
             'maxScore must be lower than 8 and greater than 2'),
         _editable = false,
+        onChanged = null,
         super(key: key);
 
   /// This named constructor sets _editable value to true and make slider visible to the user.
+  /// [score] must be lower or equal than [maxScore] to make the widget work correctly.
+  /// Also, [maxScore] must be between 2 and 8.
   const FlScoreBar.editable({
     Key? key,
     this.title,
@@ -45,6 +54,7 @@ class FlScoreBar extends StatefulWidget {
     this.lowScoreColor = BaseColors.lowScoreColor,
     this.averageScoreColor = BaseColors.averageScoreColor,
     this.maxScore = 5,
+    this.onChanged,
   })  : assert(score <= maxScore, 'score must be lower or equal than maxScore'),
         assert(maxScore < 8 && maxScore > 2,
             'maxScore must be lower than 8 and greater than 2'),
@@ -152,6 +162,9 @@ class _FlScoreBarState extends State<FlScoreBar> {
       );
 
   /// Mutable ScoreBar Widget using Flutter Slider
+  /// we create main score row widget based on [widget.score] value.
+  /// Then, we had to put a [Slider] on the score widget to update the score
+  /// value by user.
   Widget _editableScoreBarWidget(Color barColor) => Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -216,20 +229,28 @@ class _FlScoreBarState extends State<FlScoreBar> {
                   right: 0,
                   bottom: 0,
                   child: SliderTheme(
-                    data: SliderThemeData(trackShape: CustomTrackShape()), // Defining custom TrackShape to remove the default padding.
+                    data: SliderThemeData(
+                        trackShape:
+                            CustomTrackShape()), // Defining custom TrackShape to remove the default padding.
                     child: Slider(
                       min: 0,
                       thumbColor: barColor,
-                      activeColor: Colors.transparent, // TrackShape colors must be transparent to make them invisible.
-                      inactiveColor: Colors.transparent, // TrackShape colors must be transparent to make them invisible.
+                      activeColor: Colors
+                          .transparent, // TrackShape colors must be transparent to make them invisible.
+                      inactiveColor: Colors
+                          .transparent, // TrackShape colors must be transparent to make them invisible.
                       max: widget.maxScore.toDouble(),
                       value: _currentValue,
                       onChanged: (value) {
-                        // Rebuild widget to change the current score value
-                        // and re-initialize the colors and score widget parts (only enabled in mutable state)
+                        /// Rebuild widget to change the current score value
+                        /// and re-initialize the colors and score widget parts (only enabled in mutable state)
                         setState(() {
                           _currentValue = value;
                         });
+
+                        /// call [widget.onChanged] method to notify that
+                        /// the score value is updated
+                        if (widget.onChanged != null) widget.onChanged!(value);
                       },
                     ),
                   ),
