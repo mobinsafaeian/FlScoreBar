@@ -8,7 +8,7 @@ And `mutable` is the state that can be changed by the user action.
 First of all, you must add the package to your `pubspec.yaml`:
 
 ```yaml
-fl_score_bar: ^0.2.2
+fl_score_bar: ^0.2.3
 ```
 
 or enter this in your command line: 
