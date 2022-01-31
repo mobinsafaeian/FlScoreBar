@@ -49,6 +49,10 @@ class _IconScoreBarState extends State<IconScoreBar> {
   /// It's value will change when the user changes the score value.
   late double currentValue;
 
+  /// Current direction(rtl/ltr)
+  /// We need this property to set it to the custom clipper for clipping score icon.
+  late bool isRtl;
+
   @override
   void initState() {
     /// Initialize current value with [widget.score]
@@ -63,6 +67,9 @@ class _IconScoreBarState extends State<IconScoreBar> {
   /// score value by user.
   @override
   Widget build(BuildContext context) {
+    /// Set current direction
+    isRtl = Directionality.of(context) == TextDirection.rtl;
+
     return Stack(
       children: [
         Row(
@@ -118,7 +125,7 @@ class _IconScoreBarState extends State<IconScoreBar> {
   }
 
   /// Returns [Icon] when [index] is lower than [currentValue].
-  /// Returns [Icon] wrapped in [ClipRect] with [HalfClipper] CustomClipper to
+  /// Returns [Icon] wrapped in [ClipRect] with [IconClipper] CustomClipper to
   /// clip the icon.
   /// Returns [Container] when the [index] is greater than [currentValue] to
   /// show nothing.
@@ -136,7 +143,10 @@ class _IconScoreBarState extends State<IconScoreBar> {
     } else if (index == currentValue.toInt()) {
       return Expanded(
         child: ClipRect(
-            clipper: HalfClipper(clip: currentValue - currentValue.toInt()),
+            clipper: IconClipper(
+              isRtl: isRtl,
+              clip: currentValue - currentValue.toInt(),
+            ),
             child: Icon(
               widget.scoreIcon,
               color: widget.iconColor,

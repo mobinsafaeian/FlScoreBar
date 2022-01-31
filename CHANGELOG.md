@@ -1,3 +1,7 @@
+## 0.2.4 - [31/01/2022]
+
+* Added Rtl support
+
 ## 0.2.3 - [29/01/2022]
 
 * Complete documentations

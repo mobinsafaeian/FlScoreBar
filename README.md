@@ -1,14 +1,14 @@
 ## FlScoreBar
 
-A simple flutter score bar that can be used in 2 states. `immutable` is the state that can be shown to the user.
-And `mutable` is the state that can be changed by the user action.
+A simple flutter score bar package that can be used in 2 states. `immutable` is the state that can be shown to the user.
+And `mutable` is the state that can be changed by the user action. All widgets support Rtl direction.
 
 ## Usage
 
 First of all, you must add the package to your `pubspec.yaml`:
 
 ```yaml
-fl_score_bar: ^0.2.3
+fl_score_bar: ^0.2.4
 ```
 
 or enter this in your command line: 
